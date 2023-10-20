@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'Dev.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+import dj_database_url
 DATABASES = {
    'default': {
         'NAME': 'devine',
@@ -85,6 +85,8 @@ DATABASES = {
         'PASSWORD': '9867947'
     }
 }
+
+DATABASES['default']=dj_database_url.parse('postgres://default:X1KMDAj4vUQp@ep-tight-resonance-76179956.us-east-1.postgres.vercel-storage.com:5432/verceldb')
 
 
 # Password validation
