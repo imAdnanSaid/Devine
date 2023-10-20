@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-_m1#l4-8b42mex70!nk@1%ez^z0!*(_c#qbcs#)q_tdg%u$cba
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -38,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base'
 ]
-
-AUTH_USER_MODEL = 'base.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,30 +72,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Dev.wsgi.application'
 
-import subprocess
 
-# Define the name of the module you want to install
-module_name = "dj-database-url"
-
-# Use subprocess to run the 'pip install' command
-try:
-    subprocess.check_call(["pip", "install", module_name])
-    print(f"Successfully installed {module_name}")
-except subprocess.CalledProcessError:
-    print(f"Failed to install {module_name}")
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-import dj_database_url
+
 DATABASES = {
-   'default': {
-        'NAME': 'devine',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': '9867947'
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-DATABASES['default']=dj_database_url.parse("postgres://default:X1KMDAj4vUQp@ep-tight-resonance-76179956.us-east-1.postgres.vercel-storage.com:5432/verceldb")
 
 
 # Password validation
@@ -134,18 +119,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/images/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-#     ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+    ]
 
-import os
-
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-
-MEDIA_ROOT = BASE_DIR / 'static/images'
+MEDIA_ROOT = '/static/images/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
