@@ -96,7 +96,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default']=dj_database_url.parse('psql "postgres://default:X1KMDAj4vUQp@ep-tight-resonance-76179956.us-east-1.postgres.vercel-storage.com:5432/verceldb"')
+DATABASES['default']=dj_database_url.parse("postgres://default:X1KMDAj4vUQp@ep-tight-resonance-76179956.us-east-1.postgres.vercel-storage.com:5432/verceldb")
 
 
 # Password validation
