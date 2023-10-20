@@ -20,15 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = 'django-insecure-_m1#l4-8b42mex70!nk@1%ez^z0!*(_c#qbcs#)q_tdg%u$cba'
-
-
+SECRET_KEY = 'django-insecure-_m1#l4-8b42mex70!nk@1%ez^z0!*(_c#qbcs#)q_tdg%u$cba'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']
 
 # Application definition
 
@@ -76,7 +73,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Dev.wsgi.application'
 
+import subprocess
 
+# Define the name of the module you want to install
+module_name = "dj-database-url"
+
+# Use subprocess to run the 'pip install' command
+try:
+    subprocess.check_call(["pip", "install", module_name])
+    print(f"Successfully installed {module_name}")
+except subprocess.CalledProcessError:
+    print(f"Failed to install {module_name}")
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 import dj_database_url
@@ -89,8 +96,7 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get('DATABASE')
-DATABASES['default']=dj_database_url.parse(database_url)
+DATABASES['default']=dj_database_url.parse('psql "postgres://default:X1KMDAj4vUQp@ep-tight-resonance-76179956.us-east-1.postgres.vercel-storage.com:5432/verceldb"')
 
 
 # Password validation
